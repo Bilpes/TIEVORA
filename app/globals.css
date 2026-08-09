@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* { scrollbar-width: thin; scrollbar-color: #1f2a44 #0a0f1e; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: #1f2a44; border-radius: 10px; }
+::-webkit-scrollbar-track { background: #0a0f1e; }
+.glass { background: rgba(18,27,56,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+.glow-gold { box-shadow: 0 0 30px rgba(212,168,67,0.35); }
+.glow-cyan { box-shadow: 0 0 24px rgba(61,213,214,0.3); }
