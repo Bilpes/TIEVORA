@@ -73,13 +73,14 @@ export default function Page() {
               <h1 className="text-[28px] md:text-[40px] lg:text-[48px] font-black leading-none mt-2">
                 Say <span className="text-[#d4a843]">Hello Tievora</span> <span className="text-white/60">or</span> <span className="text-[#3dd5d6]">Hi Tievora</span>
               </h1>
-              <p className="text-white/70 mt-3 text-sm md:text-base max-w-[640px]">All 12 agents wake up in parallel — scanning every office in every country & state, streaming live insights to the CEO in under 2 seconds. Works on mobile, tablet & laptop.</p>
+              <p className="text-white/70 mt-3 text-sm md:text-base max-w-[640px]">All 12 agents wake up in parallel — scanning every Tietoevry office in every country & state (Espoo HQ, Stockholm, Fornebu, Pune, Bangalore, Szczecin…), streaming live insights to the CEO in under 2 seconds. Works on mobile, tablet & laptop.</p>
               <div className="mt-5"><WakeBar /></div>
               <div className="mt-4 flex flex-wrap gap-2 text-xs">
                 <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">🎙️ Voice Wake</span>
                 <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">⚡ Parallel • 12 Agents</span>
-                <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">🌍 12 Offices • 8 Countries</span>
+                <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">🌍 {offices.length} Offices • 27 Countries</span>
                 <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">🧠 RAG Knowledge</span>
+                <a href="https://www.tieto.com/en/contact-us/locations/" target="_blank" className="px-3 py-1 rounded-full bg-[#d4a843]/15 border border-[#d4a843]/30 text-[#d4a843]">↗ tieto.com/locations</a>
               </div>
             </div>
             <div className="glass rounded-2xl p-4 grid grid-cols-3 gap-3">
