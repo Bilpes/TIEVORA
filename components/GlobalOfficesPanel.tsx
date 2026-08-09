@@ -64,7 +64,7 @@ export default function GlobalOfficesPanel() {
             <div className="flex-1 min-w-0">
               <div className="text-sm font-semibold truncate">{o.city} <span className="text-white/50 font-normal">• {o.country} / {o.state}</span></div>
               <div className="text-[11px] text-white/40 truncate">{o.address} • <span className="text-[#d4a843]">{o.unit}</span></div>
-              <div className="text-[11px] text-white/60">{o.headcount.toLocaleString()} people • {o.projects} projects</div>
+              <div className="text-[11px] text-white/60" suppressHydrationWarning>{o.headcount.toLocaleString('en-US')} people • {o.projects} projects</div>
               <div className="text-xs mt-1 text-emerald-200/90 truncate">› {o.pulse}</div>
             </div>
             <div className="w-2 h-2 mt-2 bg-emerald-400 rounded-full animate-pulse flex-shrink-0" />
