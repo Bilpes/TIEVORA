@@ -1,13 +1,21 @@
 version: "3.9"
 services:
   tievora:
-    build: .
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_DUMMY_MODE: ${NEXT_PUBLIC_DUMMY_MODE:-true}
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_DUMMY_MODE=true
+      - NEXT_PUBLIC_DUMMY_MODE=${NEXT_PUBLIC_DUMMY_MODE:-true}
+      - NEXT_PUBLIC_API_BASE=${NEXT_PUBLIC_API_BASE:-}
       - DATABASE_URL=${DATABASE_URL:-postgres://tievora:tievora@db:5432/tievora}
       - OPENAI_API_KEY=${OPENAI_API_KEY:-dummy}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL:-}
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
     depends_on:
       - db
   db:

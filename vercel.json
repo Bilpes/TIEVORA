@@ -1,0 +1,12 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "env": {
+    "NEXT_PUBLIC_DUMMY_MODE": "true"
+  },
+  "functions": {
+    "app/api/**/*.ts": { "maxDuration": 10 }
+  }
+}
