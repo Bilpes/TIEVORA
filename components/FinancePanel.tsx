@@ -32,7 +32,7 @@ export default function FinancePanel() {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <div className="text-xs text-white/50 mt-2">Burn Rate ${kpis.burnRate.toLocaleString()} / mo • Click profit bar to drill down (mock)</div>
+      <div className="text-xs text-white/50 mt-2" suppressHydrationWarning>Burn Rate ${kpis.burnRate.toLocaleString('en-US')} / mo • Click profit bar to drill down (mock)</div>
     </div>
   );
 }

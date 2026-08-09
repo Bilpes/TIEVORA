@@ -54,7 +54,7 @@ export default function ProjectTimeline() {
               </div>
               <div className="text-[11px] text-white/50 mt-1">{p.progress}%</div>
             </div>
-            <div className={`text-sm font-bold ${p.profit<0?"text-red-300":"text-emerald-300"}`}>{p.profit<0?"-":"+"}${Math.abs(p.profit).toLocaleString()}</div>
+            <div suppressHydrationWarning className={`text-sm font-bold ${p.profit<0?"text-red-300":"text-emerald-300"}`}>{p.profit<0?"-":"+"}${Math.abs(p.profit).toLocaleString('en-US')}</div>
           </div>
         ))}
         {filtered.length===0 && <div className="text-sm text-white/50 py-6 text-center">No projects in this unit / role filter</div>}
