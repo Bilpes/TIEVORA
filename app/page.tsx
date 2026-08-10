@@ -72,8 +72,10 @@ export default function Page() {
       </header>
 
       <section className="max-w-[1440px] mx-auto px-4 md:px-6 pt-6 md:pt-8">
-        <div className="glass rounded-[24px] p-4 md:p-6 lg:p-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#d4a843]/10 via-transparent to-[#3dd5d6]/10 pointer-events-none" />
+        <div className="glass-strong glow-gold-strong rounded-[24px] p-4 md:p-6 lg:p-8 relative overflow-hidden hero-gradient">
+          <div className="absolute inset-0 opacity-[0.08] pointer-events-none" style={{backgroundImage: "url(/images/hero.jpg)", backgroundSize: "cover", backgroundPosition: "center", mixBlendMode: "overlay"}} />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#d4a843]/12 via-transparent to-[#3dd5d6]/12 pointer-events-none" />
+          <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-[#d4a843]/50 to-transparent" />
           <div className="relative grid lg:grid-cols-[1.4fr_0.8fr] gap-6 items-start">
             <div>
               <div className="inline-flex items-center gap-2 text-xs tracking-widest text-[#d4a843]">● TIARA ORCHESTRATOR • SAY THE WORD • {user.role} VIEW</div>
@@ -94,14 +96,30 @@ export default function Page() {
               </div>
               <div className="mt-3 text-[11px] text-white/40">Env: NEXT_PUBLIC_DUMMY_MODE={dummyMode?"true":"false"} • API: /api/offices • /api/projects • /api/resources • /api/nudges • {dummyMode ? "Dummy — instant" : "Live — ERP/HR"}</div>
             </div>
-            <div className="glass rounded-2xl p-4 grid grid-cols-3 gap-3">
-              <KPI label="MTD Revenue" value={`$${(kpis.revenueMTD/1000000).toFixed(2)}M`} sub="+8.4% vs last" />
-              <KPI label="Profit MTD" value={`$${(kpis.profitMTD/1000).toFixed(0)}K`} sub="Margin 14.5%" />
-              <KPI label="On-Time" value={`${kpis.deadlineAdherence}%`} sub="2 at risk" />
-              <KPI label="Bench" value={`${kpis.bench}%`} sub="Needs rebalance" />
-              <KPI label="Backup Coverage" value="75%" sub="3 gaps" />
-              <KPI label="Work Logs" value={`${((1 - kpis.missingLogs/12)*100).toFixed(0)}%`} sub="4 missing" />
-              <div className="col-span-3 mt-1 text-[11px] text-white/50">Role: <b className="text-white">{user.role}</b> {user.country? `• ${user.country}`:"• Global"} • Units: Create/Connect/Care/Banking/Industry/Transform</div>
+            <div className="glass-strong glow-gold-strong rounded-2xl p-4">
+              <div className="grid grid-cols-3 gap-3">
+                <KPI label="MTD Revenue" value={`$${(kpis.revenueMTD/1000000).toFixed(2)}M`} sub="+8.4% vs last" />
+                <KPI label="Profit MTD" value={`$${(kpis.profitMTD/1000).toFixed(0)}K`} sub="Margin 14.5%" />
+                <KPI label="On-Time" value={`${kpis.deadlineAdherence}%`} sub="2 at risk" />
+                <KPI label="Bench" value={`${kpis.bench}%`} sub="Needs rebalance" />
+                <KPI label="Backup Coverage" value="75%" sub="3 gaps" />
+                <KPI label="Work Logs" value={`${((1 - kpis.missingLogs/12)*100).toFixed(0)}%`} sub="4 missing" />
+              </div>
+              <div className="mt-3 text-[11px] text-white/50">Role: <b className="text-white">{user.role}</b> {user.country? `• ${user.country}`:"• Global"} • Units: Create/Connect/Care/Banking/Industry/Transform</div>
+              <a href="/TIARA_CEO_Video_5min.mp4" target="_blank" className="mt-4 block relative rounded-xl overflow-hidden border border-white/10 group card-hover">
+                <img src="/images/hero.jpg" alt="CEO Video" className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-white/95 flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl glow-gold">
+                    <span className="text-[#0a0f1e] text-lg ml-0.5">▶</span>
+                  </div>
+                </div>
+                <div className="absolute bottom-2 left-3 right-3">
+                  <div className="text-xs font-bold text-white">CEO Brief — 5 min • Watch Now</div>
+                  <div className="text-[10px] text-white/70">13 agents • Voice • Map glow • Hunter pipeline</div>
+                </div>
+                <div className="absolute top-2 right-2 text-[9px] px-2 py-1 rounded-full bg-red-500 text-white font-bold">VIDEO</div>
+              </a>
             </div>
           </div>
 
@@ -186,9 +204,9 @@ export default function Page() {
 
 function KPI({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
-    <div className="rounded-xl bg-[#0f1a33]/70 border border-white/10 p-3">
+    <div className="glass rounded-xl p-3 card-hover shimmer">
       <div className="text-[10px] tracking-widest text-white/50">{label}</div>
-      <div className="text-lg font-black">{value}</div>
+      <div className="text-lg font-black bg-gradient-to-br from-white to-white/80 bg-clip-text text-transparent">{value}</div>
       <div className="text-[11px] text-emerald-300">{sub}</div>
     </div>
   );
