@@ -45,10 +45,10 @@ export async function POST() {
     // Upsert resources
     for (const r of resources) {
       const off = offices.find(o=> o.city===r.office || r.office.includes(o.city) || o.city.includes(r.office))?.id || null;
-      await pool.query(`INSERT INTO resources (id,name,role,office,office_id,country,state,utilization,leaving_risk,backup,skills,last_log)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
-        ON CONFLICT (id) DO UPDATE SET name=EXCLUDED.name, role=EXCLUDED.role, office=EXCLUDED.office, office_id=EXCLUDED.office_id, country=EXCLUDED.country, state=EXCLUDED.state, utilization=EXCLUDED.utilization, leaving_risk=EXCLUDED.leaving_risk, backup=EXCLUDED.backup, skills=EXCLUDED.skills, last_log=EXCLUDED.last_log, updated_at=NOW()`,
-        [r.id, r.name, r.role, r.office, off, r.country, r.state, r.utilization, r.leavingRisk, r.backup, JSON.stringify(r.skills), r.lastLog]);
+      await pool.query(`INSERT INTO resources (id,name,role,office,office_id,country,state,utilization,leaving_risk,backup,skills,last_log,is_knowledge_owner,log_source)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+        ON CONFLICT (id) DO UPDATE SET name=EXCLUDED.name, role=EXCLUDED.role, office=EXCLUDED.office, office_id=EXCLUDED.office_id, country=EXCLUDED.country, state=EXCLUDED.state, utilization=EXCLUDED.utilization, leaving_risk=EXCLUDED.leaving_risk, backup=EXCLUDED.backup, skills=EXCLUDED.skills, last_log=EXCLUDED.last_log, is_knowledge_owner=EXCLUDED.is_knowledge_owner, log_source=EXCLUDED.log_source, updated_at=NOW()`,
+        [r.id, r.name, r.role, r.office, off, r.country, r.state, r.utilization, r.leavingRisk, r.backup, JSON.stringify(r.skills), r.lastLog, (r as any).isKnowledgeOwner ?? false, (r as any).logSource ?? 'auto']);
     }
     // Upsert work_logs + chunks (clear existing for idempotency in demo)
     await pool.query("DELETE FROM work_log_chunks");

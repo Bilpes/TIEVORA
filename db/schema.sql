@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS projects (
 CREATE INDEX IF NOT EXISTS idx_projects_status ON projects(status);
 CREATE INDEX IF NOT EXISTS idx_projects_unit ON projects(unit);
 
--- Resources / HR
+-- Resources / HR — Hybrid <200 Knowledge Owners + Auto-capture for 5k
 CREATE TABLE IF NOT EXISTS resources (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
@@ -62,11 +62,18 @@ CREATE TABLE IF NOT EXISTS resources (
   skills JSONB NOT NULL DEFAULT '[]',
   last_log TEXT NOT NULL DEFAULT '',
   last_log_at TIMESTAMPTZ DEFAULT NOW(),
+  -- Hybrid scaling: only ~180 Knowledge Owners (CEO, Country Heads, Leads) log manually, rest auto from Git/Jira
+  is_knowledge_owner BOOLEAN NOT NULL DEFAULT FALSE,
+  log_source TEXT NOT NULL DEFAULT 'auto' CHECK (log_source IN ('manual','auto')),
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 CREATE INDEX IF NOT EXISTS idx_resources_country ON resources(country);
 CREATE INDEX IF NOT EXISTS idx_resources_risk ON resources(leaving_risk);
+CREATE INDEX IF NOT EXISTS idx_resources_owner ON resources(is_knowledge_owner);
+-- Migration for existing DBs (idempotent):
+ALTER TABLE resources ADD COLUMN IF NOT EXISTS is_knowledge_owner BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE resources ADD COLUMN IF NOT EXISTS log_source TEXT NOT NULL DEFAULT 'auto';
 
 -- Users & RBAC (CEO vs Manager)
 CREATE TABLE IF NOT EXISTS app_users (

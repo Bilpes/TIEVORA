@@ -17,6 +17,9 @@ export type Project = {
 };
 
 export type Resource = {
+  isKnowledgeOwner: boolean;
+  logSource: "manual" | "auto"; // hybrid: only <200 owners type manually, rest auto from Git/Jira
+
   id: string;
   name: string;
   role: string;
@@ -131,18 +134,18 @@ export const projects: Project[] = [
 ];
 
 export const resources: Resource[] = [
-  { id: "R01", name: "Aarav Mehta", role: "Tech Lead", office: "Bangalore", country: "India", state: "Karnataka", utilization: 92, leavingRisk: "Low", backup: "Sneha R.", skills: ["Next.js","RAG","VectorDB"], lastLog: "Shipped RAG incremental sync + eval harness — Bangalore pod" },
-  { id: "R02", name: "Sneha Rao", role: "Sr Engineer", office: "Pune", country: "India", state: "Maharashtra", utilization: 88, leavingRisk: "Medium", backup: null, skills: ["Python","FastAPI"], lastLog: "API for work-log ingestion — Pune" },
-  { id: "R03", name: "Elias Virtanen", role: "PM", office: "Espoo (HQ)", country: "Finland", state: "Uusimaa", utilization: 76, leavingRisk: "Low", backup: "Ananya K.", skills: ["Agile","SAFe"], lastLog: "Updated RAID for Espoo HQ platform" },
-  { id: "R04", name: "Fatima Al Zahra", role: "Data Scientist", office: "Kyiv", country: "Ukraine", state: "Kyiv", utilization: 81, leavingRisk: "High", backup: null, skills: ["LLM","Eval"], lastLog: "No handover — attrition risk Kyiv" },
-  { id: "R05", name: "Lars Hansen", role: "Product Owner", office: "Fornebu (Oslo)", country: "Norway", state: "Viken", utilization: 68, leavingRisk: "Low", backup: "Maya L.", skills: ["Discovery"], lastLog: "QBR deck — Fornebu banking" },
-  { id: "R06", name: "Priya Nair", role: "QA Lead", office: "Warsaw", country: "Poland", state: "Masovian", utilization: 95, leavingRisk: "High", backup: null, skills: ["Playwright"], lastLog: "Test plan overdue 4 days — Szczecin support" },
-  { id: "R07", name: "Chen Wei", role: "ML Eng", office: "Singapore", country: "Singapore", state: "Central", utilization: 84, leavingRisk: "Medium", backup: "Arjun P.", skills: ["Pytorch","RAG"], lastLog: "Hybrid search chunk 512 — Singapore pilot" },
-  { id: "R08", name: "Emily Stone", role: "UX Lead", office: "London", country: "United Kingdom", state: "England", utilization: 73, leavingRisk: "Low", backup: "Noah B.", skills: ["Figma","Research"], lastLog: "Design tokens published — UK" },
-  { id: "R09", name: "Hans Müller", role: "Compliance", office: "Regensburg", country: "Germany", state: "Bavaria", utilization: 64, leavingRisk: "Low", backup: "Lena K.", skills: ["GDPR","ISO"], lastLog: "DPIA draft v0.8 — Regensburg" },
-  { id: "R10", name: "Mikael Lindqvist", role: "DevOps", office: "Stockholm (Solna)", country: "Sweden", state: "Stockholm", utilization: 90, leavingRisk: "Medium", backup: null, skills: ["K8s","Terraform"], lastLog: "No work log 6 days — Stockholm NUDGE" },
-  { id: "R11", name: "Katarzyna Nowak", role: "Finance Analyst", office: "Szczecin", country: "Poland", state: "West Pomeranian", utilization: 71, leavingRisk: "Low", backup: "Samir D.", skills: ["FP&A"], lastLog: "Margin calc — Poland DC" },
-  { id: "R12", name: "Olena Petrenko", role: "Support Eng", office: "Lviv", country: "Ukraine", state: "Lviv", utilization: 77, leavingRisk: "Low", backup: "Zoe M.", skills: ["SRE"], lastLog: "Runbook for Kyiv Create updated — Lviv" },
+  { id: "R01", isKnowledgeOwner: true, logSource: "manual", name: "Aarav Mehta", role: "Tech Lead", office: "Bangalore", country: "India", state: "Karnataka", utilization: 92, leavingRisk: "Low", backup: "Sneha R.", skills: ["Next.js","RAG","VectorDB"], lastLog: "Shipped RAG incremental sync + eval harness — Bangalore pod" },
+  { id: "R02", isKnowledgeOwner: true, logSource: "manual", name: "Sneha Rao", role: "Sr Engineer", office: "Pune", country: "India", state: "Maharashtra", utilization: 88, leavingRisk: "Medium", backup: null, skills: ["Python","FastAPI"], lastLog: "API for work-log ingestion — Pune" },
+  { id: "R03", isKnowledgeOwner: true, logSource: "manual", name: "Elias Virtanen", role: "PM", office: "Espoo (HQ)", country: "Finland", state: "Uusimaa", utilization: 76, leavingRisk: "Low", backup: "Ananya K.", skills: ["Agile","SAFe"], lastLog: "Updated RAID for Espoo HQ platform" },
+  { id: "R04", isKnowledgeOwner: true, logSource: "manual", name: "Fatima Al Zahra", role: "Data Scientist", office: "Kyiv", country: "Ukraine", state: "Kyiv", utilization: 81, leavingRisk: "High", backup: null, skills: ["LLM","Eval"], lastLog: "No handover — attrition risk Kyiv" },
+  { id: "R05", isKnowledgeOwner: true, logSource: "manual", name: "Lars Hansen", role: "Product Owner", office: "Fornebu (Oslo)", country: "Norway", state: "Viken", utilization: 68, leavingRisk: "Low", backup: "Maya L.", skills: ["Discovery"], lastLog: "QBR deck — Fornebu banking" },
+  { id: "R06", isKnowledgeOwner: true, logSource: "manual", name: "Priya Nair", role: "QA Lead", office: "Warsaw", country: "Poland", state: "Masovian", utilization: 95, leavingRisk: "High", backup: null, skills: ["Playwright"], lastLog: "Test plan overdue 4 days — Szczecin support" },
+  { id: "R07", isKnowledgeOwner: false, logSource: "auto", name: "Chen Wei", role: "ML Eng", office: "Singapore", country: "Singapore", state: "Central", utilization: 84, leavingRisk: "Medium", backup: "Arjun P.", skills: ["Pytorch","RAG"], lastLog: "Hybrid search chunk 512 — Singapore pilot" },
+  { id: "R08", isKnowledgeOwner: false, logSource: "auto", name: "Emily Stone", role: "UX Lead", office: "London", country: "United Kingdom", state: "England", utilization: 73, leavingRisk: "Low", backup: "Noah B.", skills: ["Figma","Research"], lastLog: "Design tokens published — UK" },
+  { id: "R09", isKnowledgeOwner: true, logSource: "manual", name: "Hans Müller", role: "Compliance", office: "Regensburg", country: "Germany", state: "Bavaria", utilization: 64, leavingRisk: "Low", backup: "Lena K.", skills: ["GDPR","ISO"], lastLog: "DPIA draft v0.8 — Regensburg" },
+  { id: "R10", isKnowledgeOwner: false, logSource: "auto", name: "Mikael Lindqvist", role: "DevOps", office: "Stockholm (Solna)", country: "Sweden", state: "Stockholm", utilization: 90, leavingRisk: "Medium", backup: null, skills: ["K8s","Terraform"], lastLog: "No work log 6 days — Stockholm NUDGE" },
+  { id: "R11", isKnowledgeOwner: false, logSource: "auto", name: "Katarzyna Nowak", role: "Finance Analyst", office: "Szczecin", country: "Poland", state: "West Pomeranian", utilization: 71, leavingRisk: "Low", backup: "Samir D.", skills: ["FP&A"], lastLog: "Margin calc — Poland DC" },
+  { id: "R12", isKnowledgeOwner: false, logSource: "auto", name: "Olena Petrenko", role: "Support Eng", office: "Lviv", country: "Ukraine", state: "Lviv", utilization: 77, leavingRisk: "Low", backup: "Zoe M.", skills: ["SRE"], lastLog: "Runbook for Kyiv Create updated — Lviv" },
 ];
 
 export const workLogs = [
