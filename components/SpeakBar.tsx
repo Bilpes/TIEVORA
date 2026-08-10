@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Volume2, VolumeX, Play, Square, Mic } from "lucide-react";
 import { useTiaraStore } from "@/lib/store";
 import { agentDefs } from "@/lib/agents";
-import { isSpeechSupported, speakBriefing, stopSpeaking } from "@/lib/speech";
+import { isSpeechSupported, speakBriefing, stopSpeaking, clearAbort } from "@/lib/speech";
 
 export default function SpeakBar() {
-  const { awakened, agents, speakEnabled, setSpeakEnabled, speakingId, setSpeakingId, briefingActive, setBriefingActive } = useTiaraStore();
+  const { awakened, agents, speakEnabled, setSpeakEnabled, speakingId, setSpeakingId, briefingActive, setBriefingActive, autoBriefingDone, setAutoBriefingDone } = useTiaraStore();
   const [mounted, setMounted] = useState(false);
   const [supported, setSupported] = useState(false);
 
@@ -16,27 +16,33 @@ export default function SpeakBar() {
   }, []);
 
   useEffect(()=> {
-    if (!speakEnabled || !awakened || briefingActive) return;
+    if (!speakEnabled || !awakened || briefingActive || autoBriefingDone) return;
     const allDone = agentDefs.every(a=> agents[a.id]?.status==="done" && agents[a.id]?.insight);
     if (!allDone) return;
     const list = agentDefs.map(a=> ({ id:a.id, name:a.name, office:a.office, insight: agents[a.id].insight || a.insight() }));
+    clearAbort();
     setBriefingActive(true);
+    setAutoBriefingDone(true);
     speakBriefing(list, "all", (idx,total,id)=> setSpeakingId(id)).finally(()=> {
       setSpeakingId(null);
       setBriefingActive(false);
     });
-  }, [agents, awakened, speakEnabled, briefingActive, setSpeakingId, setBriefingActive]);
+  }, [agents, awakened, speakEnabled, briefingActive, autoBriefingDone, setSpeakingId, setBriefingActive, setAutoBriefingDone]);
 
   const playCEO = async () => {
+    clearAbort();
     const list = agentDefs.map(a=> ({ id:a.id, name:a.name, office:a.office, insight: agents[a.id]?.insight || a.insight() }));
     setBriefingActive(true);
+    setAutoBriefingDone(true);
     await speakBriefing(list, "ceo", (idx,total,id)=> setSpeakingId(id));
     setSpeakingId(null);
     setBriefingActive(false);
   };
   const playAll = async () => {
+    clearAbort();
     const list = agentDefs.map(a=> ({ id:a.id, name:a.name, office:a.office, insight: agents[a.id]?.insight || a.insight() }));
     setBriefingActive(true);
+    setAutoBriefingDone(true);
     await speakBriefing(list, "all", (idx,total,id)=> setSpeakingId(id));
     setSpeakingId(null);
     setBriefingActive(false);

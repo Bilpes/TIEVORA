@@ -11,7 +11,7 @@ export default function AgentGrid() {
       <div className="flex flex-col gap-2 mb-3">
         <div className="flex flex-wrap items-end justify-between gap-2">
           <div>
-            <h2 className="text-lg md:text-xl font-bold">12 Agents • Parallel Execution • Speaking</h2>
+            <h2 className="text-lg md:text-xl font-bold">13 Agents • Parallel Execution • Speaking</h2>
             <p className="text-xs md:text-sm text-white/60">Each agent is pinned to an office/state. They wake together, stream AND speak CEO insights.</p>
           </div>
           <div className="hidden md:flex items-center gap-2 text-xs">
@@ -28,7 +28,7 @@ export default function AgentGrid() {
           <AgentCard key={a.id} def={a} state={agents[a.id]} awakened={awakened} />
         ))}
       </div>
-      <p className="text-[11px] text-white/40 mt-2">Tip: Tap 🔊 on any card to hear that agent alone. Or use “CEO Brief” / “Play 12 Agents” above. Agents auto-speak when Voice ON and streaming completes.</p>
+      <p className="text-[11px] text-white/40 mt-2">Tip: Tap 🔊 on any card to hear that agent alone. Or use “CEO Brief” / “Play 13 Agents” above. Agents auto-speak once per wake when Voice ON.</p>
     </div>
   );
 }
