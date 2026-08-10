@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import { speakOneAgent, isSpeechSupported, stopSpeaking } from "@/lib/speech";
@@ -13,8 +14,10 @@ export default function AgentCard({ def, state, awakened }: any) {
     done: "bg-emerald-400/20 text-emerald-300",
   };
   const { speakingId, setSpeakingId } = useTievoraStore();
+  const [mounted, setMounted] = useState(false);
+  useEffect(()=> setMounted(true), []);
   const isSpeaking = speakingId === def.id;
-  const canSpeak = !!state?.insight && isSpeechSupported();
+  const canSpeak = mounted && !!state?.insight && isSpeechSupported();
   const handleSpeak = async () => {
     if (isSpeaking) { stopSpeaking(); setSpeakingId(null); return; }
     setSpeakingId(def.id);

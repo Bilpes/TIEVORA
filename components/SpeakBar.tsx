@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Volume2, VolumeX, Play, Square, Mic } from "lucide-react";
 import { useTievoraStore } from "@/lib/store";
 import { agentDefs } from "@/lib/agents";
@@ -7,6 +7,13 @@ import { isSpeechSupported, speakBriefing, stopSpeaking } from "@/lib/speech";
 
 export default function SpeakBar() {
   const { awakened, agents, speakEnabled, setSpeakEnabled, speakingId, setSpeakingId, briefingActive, setBriefingActive } = useTievoraStore();
+  const [mounted, setMounted] = useState(false);
+  const [supported, setSupported] = useState(false);
+
+  useEffect(()=> {
+    setMounted(true);
+    setSupported(isSpeechSupported());
+  }, []);
 
   useEffect(()=> {
     if (!speakEnabled || !awakened || briefingActive) return;
@@ -36,7 +43,12 @@ export default function SpeakBar() {
   };
   const stop = () => { stopSpeaking(); setSpeakingId(null); setBriefingActive(false); };
 
-  if (!isSpeechSupported()) {
+  // Hydration fix: server renders fallback (window undefined -> not supported)
+  // Client initial render must match server, then after mount we switch to real UI
+  if (!mounted) {
+    return <div className="text-[11px] text-white/40">🔇 Voice not supported in this browser — use Chrome/Edge for speaking agents</div>;
+  }
+  if (!supported) {
     return <div className="text-[11px] text-white/40">🔇 Voice not supported in this browser — use Chrome/Edge for speaking agents</div>;
   }
 
@@ -50,7 +62,7 @@ export default function SpeakBar() {
         <Play className="w-3.5 h-3.5" /> CEO Brief (1 voice, 20s)
       </button>
       <button onClick={playAll} disabled={briefingActive} className="h-8 px-3 rounded-full bg-white text-[#0a0f1e] text-xs font-bold flex items-center gap-1.5 disabled:opacity-50">
-        <Mic className="w-3.5 h-3.5" /> Play 12 Agents (~60s)
+        <Mic className="w-3.5 h-3.5" /> Play 13 Agents (~60s)
       </button>
       {briefingActive && (
         <button onClick={stop} className="h-8 px-3 rounded-full bg-red-500 text-white text-xs font-bold flex items-center gap-1.5">
@@ -58,7 +70,7 @@ export default function SpeakBar() {
         </button>
       )}
       {briefingActive && speakingId && (
-        <span className="text-xs text-white/60">Speaking: <b className="text-white">{agentDefs.find(a=>a.id===speakingId)?.name}</b> ({agentDefs.find(a=>a.id===speakingId)?.office}) • {agentDefs.findIndex(a=>a.id===speakingId)+1}/12</span>
+        <span className="text-xs text-white/60">Speaking: <b className="text-white">{agentDefs.find(a=>a.id===speakingId)?.name}</b> ({agentDefs.find(a=>a.id===speakingId)?.office}) • {agentDefs.findIndex(a=>a.id===speakingId)+1}/13</span>
       )}
       {!briefingActive && awakened && speakEnabled && <span className="text-[11px] text-white/40">Auto-briefing ON — agents will speak when streaming completes</span>}
     </div>
