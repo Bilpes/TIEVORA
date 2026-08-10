@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import { speakOneAgent, isSpeechSupported, stopSpeaking } from "@/lib/speech";
-import { useTievoraStore } from "@/lib/store";
+import { useTiaraStore } from "@/lib/store";
 
 export default function AgentCard({ def, state, awakened }: any) {
-  const { speakingId, setSpeakingId } = useTievoraStore();
+  const { speakingId, setSpeakingId } = useTiaraStore();
   const [mounted, setMounted] = useState(false);
   useEffect(()=> setMounted(true), []);
   const isSpeaking = speakingId === def.id;
@@ -65,7 +65,7 @@ export default function AgentCard({ def, state, awakened }: any) {
         {state?.insight ? (
           <span className={isSpeaking ? "text-white font-medium" : "text-white/90"}>{state.insight}</span>
         ) : (
-          <span className="text-white/40">{awakened ? "Waking up • checking office pulse…" : "Say “Hello Tievora” to wake this agent. It will scan its office and report to CEO."}</span>
+          <span className="text-white/40">{awakened ? "Waking up • checking office pulse…" : "Say “Hello Tiara” to wake this agent. It will scan its office and report to CEO."}</span>
         )}
         {isSpeaking && <div className="mt-2 flex gap-1"><span className="w-1 h-1 bg-emerald-400 rounded-full animate-bounce" style={{animationDelay:"0ms"}} /><span className="w-1 h-1 bg-emerald-400 rounded-full animate-bounce" style={{animationDelay:"150ms"}} /><span className="w-1 h-1 bg-emerald-400 rounded-full animate-bounce" style={{animationDelay:"300ms"}} /></div>}
       </div>

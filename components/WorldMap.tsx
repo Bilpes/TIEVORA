@@ -43,7 +43,7 @@ function LeafletMap({ offices, onSelect, speakingOffice, L }: any) {
 
   // Init map once
   useEffect(()=> {
-    const container = document.getElementById("tievora-map");
+    const container = document.getElementById("tiara-map");
     if (!container) return;
     if ((container as any)._leaflet_id) {
       try { (container as any)._leaflet_id = null; } catch {}
@@ -53,7 +53,7 @@ function LeafletMap({ offices, onSelect, speakingOffice, L }: any) {
     let map: any = null;
 
     (async () => {
-      map = L.map("tievora-map", { worldCopyJump: true, zoomControl: true }).setView([48, 20], 3);
+      map = L.map("tiara-map", { worldCopyJump: true, zoomControl: true }).setView([48, 20], 3);
       L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", { attribution: "&copy; CARTO &copy; OpenStreetMap", maxZoom: 18 }).addTo(map);
       try {
         await import("leaflet.markercluster");
@@ -82,7 +82,7 @@ function LeafletMap({ offices, onSelect, speakingOffice, L }: any) {
       clusterRef.current = null;
       markersRef.current.clear();
       try {
-        const c = document.getElementById("tievora-map");
+        const c = document.getElementById("tiara-map");
         if (c) { (c as any)._leaflet_id = null; c.innerHTML = ""; }
       } catch {}
     };
@@ -106,7 +106,7 @@ function LeafletMap({ offices, onSelect, speakingOffice, L }: any) {
       const anim = isSpeaking ? "animation: pulseGlow 1s infinite;" : "";
       const pulseRing = isSpeaking ? `<span style="position:absolute;inset:-6px;border-radius:999px;border:2px solid ${color};opacity:0.5;animation: ping 1s cubic-bezier(0,0,0.2,1) infinite;"></span>` : "";
       const html = `<div style="position:relative;background:${color};width:${size}px;height:${size}px;border-radius:999px;border:2px solid #0a0f1e;box-shadow:${glow};${anim}">${pulseRing}</div>`;
-      const icon = L.divIcon({ html, className:"tievora-pin", iconSize:[size,size], iconAnchor:[size/2,size/2] });
+      const icon = L.divIcon({ html, className:"tiara-pin", iconSize:[size,size], iconAnchor:[size/2,size/2] });
       const m = L.marker([o.lat, o.lng], { icon, zIndexOffset: isSpeaking ? 1000 : 0 });
       m.bindPopup(`
         <div style="font-family:Inter,sans-serif;min-width:220px">
@@ -150,8 +150,8 @@ function LeafletMap({ offices, onSelect, speakingOffice, L }: any) {
 
   return (
     <>
-      <style>{`@keyframes pulseGlow { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.08);opacity:0.9} } @keyframes ping { 75%,100%{transform:scale(1.8);opacity:0} } .tievora-pin{ background:transparent !important; border:none !important; }`}</style>
-      <div id="tievora-map" className="h-[420px] md:h-[520px] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0f1a33]" />
+      <style>{`@keyframes pulseGlow { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.08);opacity:0.9} } @keyframes ping { 75%,100%{transform:scale(1.8);opacity:0} } .tiara-pin{ background:transparent !important; border:none !important; }`}</style>
+      <div id="tiara-map" className="h-[420px] md:h-[520px] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0f1a33]" />
     </>
   );
 }

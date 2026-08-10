@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { offices as dummyOffices, kpis } from "@/lib/dummyData";
-import { useTievoraStore } from "@/lib/store";
+import { useTiaraStore } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { agentDefs } from "@/lib/agents";
 import WakeBar from "@/components/WakeBar";
@@ -20,7 +20,7 @@ import SalesHunterPanel from "@/components/SalesHunterPanel";
 import { config } from "@/lib/config";
 
 export default function Page() {
-  const { awakened, speakingId } = useTievoraStore();
+  const { awakened, speakingId } = useTiaraStore();
   const speakingOffice = speakingId ? agentDefs.find(a=> a.id===speakingId)?.office : undefined;
   const { user } = useAuth();
   const [dummyMode, setDummyMode] = useState(config.dummyMode);
@@ -40,7 +40,7 @@ export default function Page() {
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#d4a843] to-[#a67c2a] flex items-center justify-center font-black text-[#0a0f1e]">T</div>
             <div>
-              <div className="font-bold tracking-wide">TIEVORA</div>
+              <div className="font-bold tracking-wide">TIARA</div>
               <div className="text-[10px] tracking-[0.2em] text-white/60 -mt-1">CEO COMMAND CENTER</div>
             </div>
             <span className="hidden md:inline-flex ml-3 text-xs px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">● LIVE • 13 Agents (12 + Hunter) • 50+ offices</span>
@@ -76,9 +76,9 @@ export default function Page() {
           <div className="absolute inset-0 bg-gradient-to-br from-[#d4a843]/10 via-transparent to-[#3dd5d6]/10 pointer-events-none" />
           <div className="relative grid lg:grid-cols-[1.4fr_0.8fr] gap-6 items-start">
             <div>
-              <div className="inline-flex items-center gap-2 text-xs tracking-widest text-[#d4a843]">● TIEVORA ORCHESTRATOR • SAY THE WORD • {user.role} VIEW</div>
+              <div className="inline-flex items-center gap-2 text-xs tracking-widest text-[#d4a843]">● TIARA ORCHESTRATOR • SAY THE WORD • {user.role} VIEW</div>
               <h1 className="text-[28px] md:text-[40px] lg:text-[48px] font-black leading-none mt-2">
-                Say <span className="text-[#d4a843]">Hello Tievora</span> <span className="text-white/60">or</span> <span className="text-[#3dd5d6]">Hi Tievora</span>
+                Say <span className="text-[#d4a843]">Hello Tiara</span> <span className="text-white/60">or</span> <span className="text-[#3dd5d6]">Hi Tiara</span>
               </h1>
               <p className="text-white/70 mt-3 text-sm md:text-base max-w-[640px]">
                 All 13 agents wake in parallel — scanning <b className="text-white">{offices.length} offices</b> in every Tietoevry country & state (Espoo HQ, Stockholm, Fornebu, Pune, Bangalore, Szczecin, Kyiv…), split by <b className="text-white">Create / Connect / Care / Banking / Industry / Transform</b>. Streams to CEO in 1.6s. {user.role==="Manager" ? `Manager view: filtered to ${user.country} only.` : "CEO sees everything."}
@@ -109,7 +109,7 @@ export default function Page() {
             {awakened && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-6 rounded-xl bg-gradient-to-r from-[#d4a843]/20 to-[#3dd5d6]/20 border border-[#d4a843]/30 p-3 flex flex-wrap items-center gap-3 text-sm">
                 <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                <span className="font-semibold">TIEVORA AWAKE •</span>
+                <span className="font-semibold">TIARA AWAKE •</span>
                 <span className="text-white/80">Broadcasting to all {offices.length} offices… 13 agents streaming by business unit — scroll to map.</span>
                 <span className="ml-auto text-xs px-2 py-1 rounded bg-black/30">Latency ~1.6s • Parallel • {user.role}</span>
               </motion.div>
@@ -178,7 +178,7 @@ export default function Page() {
       </section>
 
       <footer className="border-t border-white/10 py-6 text-center text-xs text-white/50">
-        TIEVORA © 2026 • <b className="text-white">Real API</b>: /api/offices?unit=Create etc • <b className="text-white">Vercel</b>: vercel.json • <b className="text-white">Docker</b>: docker compose up --build • Env: NEXT_PUBLIC_DUMMY_MODE • Mobile/Tablet/Laptop • PWA
+        TIARA © 2026 • <b className="text-white">Real API</b>: /api/offices?unit=Create etc • <b className="text-white">Vercel</b>: vercel.json • <b className="text-white">Docker</b>: docker compose up --build • Env: NEXT_PUBLIC_DUMMY_MODE • Mobile/Tablet/Laptop • PWA
       </footer>
     </div>
   );

@@ -1,8 +1,8 @@
-# TIEVORA — CEO Command Center
+# TIARA — CEO Command Center
 ## Understanding Document for CEO & Managers
-**Version:** 1.0 | **Date:** 10 Aug 2026 | **Branch:** `main` (`578971a`) + `arena/019fe6d6-tievora` | **Repo:** https://github.com/Bilpes/TIEVORA
+**Version:** 1.0 | **Date:** 10 Aug 2026 | **Branch:** `main` (`578971a`) + `arena/019fe6d6-tiara` | **Repo:** https://github.com/Bilpes/TIARA
 
-> **One-liner:** Say **“Hello Tievora”** — 13 AI agents wake parallelly, scan 50+ Tietoevry offices in 27 countries, and speak a live CEO briefing in 60 seconds. Hunter finds new projects when pipeline is dry. RAG ensures a new hire ramps in 90 minutes, not a day.
+> **One-liner:** Say **“Hello Tiara”** — 13 AI agents wake parallelly, scan 50+ Tietoevry offices in 27 countries, and speak a live CEO briefing in 60 seconds. Hunter finds new projects when pipeline is dry. RAG ensures a new hire ramps in 90 minutes, not a day.
 
 ---
 
@@ -22,9 +22,9 @@
 
 ### 1. Executive Summary
 
-TIEVORA is a **production-ready, mobile-tablet-laptop CEO Command Center** that fuses:
+TIARA is a **production-ready, mobile-tablet-laptop CEO Command Center** that fuses:
 
-- **13 autonomous agents** (12 operational + 1 Hunter sales) waking on voice `Hello/Hi Tievora`
+- **13 autonomous agents** (12 operational + 1 Hunter sales) waking on voice `Hello/Hi Tiara`
 - **50+ real offices** from https://www.tieto.com/en/contact-us/locations/ (Finland 8, Sweden 13, Norway 6, Poland 4, India 3, Baltics, CEE, NA, APAC) visualized on a **Leaflet clustered world map** that **flies and glows** to the speaking agent’s city
 - **Voice briefing** — each agent speaks its insight with a distinct voice/pitch; CEO gets a 20s summary (Oracle) or 60s full 13-agent parallel briefing
 - **RAG Knowledge** — work logs chunked (80 words), embedded to `pgvector(1536)`, hybrid vector+keyword search p95 92ms
@@ -41,9 +41,9 @@ Live preview: `http://localhost:3000` (port 3000, 0.0.0.0 for Arena preview) —
 
 ### 2. Problem We Solve
 
-| Pain at Tieto (14,000 experts, 90+ countries) | Before TIEVORA | After |
+| Pain at Tieto (14,000 experts, 90+ countries) | Before TIARA | After |
 |---|---|---|
-| **CEO has no live pulse** — projects, deadline, P&L, bench, attrition scattered in sheets | Weekly slide deck, 2 days late | **Voice “Hello Tievora” → 1.6s live pulse from every state office** |
+| **CEO has no live pulse** — projects, deadline, P&L, bench, attrition scattered in sheets | Weekly slide deck, 2 days late | **Voice “Hello Tiara” → 1.6s live pulse from every state office** |
 | **Deadlines slip, loss hidden** — 2 at-risk projects, 1 loss-making `Industry Twin -€12k` | Found after month-end | **Chrono + Ledger agents flag RED/YELLOW + forecast +12%** |
 | **Leaving without backup** — Fatima (Kyiv) left, no handover, Priya 95% overloaded | Tribal knowledge lost | **Watchtower scans leavingRisk + NO BACKUP → auto-assign** |
 | **New hire takes a day** to understand — mandatory log ignored | 1 day shadowing | **Mandatory log → RAG chunk → new hire asks “how to deploy?” → 92ms answer** |
@@ -56,7 +56,7 @@ Live preview: `http://localhost:3000` (port 3000, 0.0.0.0 for Arena preview) —
 ### 3. What We Built
 
 #### 3.1 13 Parallel Agents (Wake Word)
-- **Trigger:** `Web Speech API` (`webkitSpeechRecognition`) or text `Hello/Hi Tievora` → `useTievoraStore.triggerAwaken()` → `GET /api/agents/stream` (SSE `text/event-stream`) streams 13 in parallel (10% → 48% → 84% → 100%)
+- **Trigger:** `Web Speech API` (`webkitSpeechRecognition`) or text `Hello/Hi Tiara` → `useTiaraStore.triggerAwaken()` → `GET /api/agents/stream` (SSE `text/event-stream`) streams 13 in parallel (10% → 48% → 84% → 100%)
 - **Agents:**
   1. **Atlas** (Espoo HQ) — Project Health
   2. **Chrono** (Stockholm) — Deadlines
@@ -109,7 +109,7 @@ Live preview: `http://localhost:3000` (port 3000, 0.0.0.0 for Arena preview) —
 
 #### CEO (Global View)
 1. `npm install && npm run dummy:run` → http://localhost:3000 (or Vercel link)
-2. Header shows `CEO` + `LIVE • 13 Agents` → say **Hello Tievora** (allow mic) or type + Enter
+2. Header shows `CEO` + `LIVE • 13 Agents` → say **Hello Tiara** (allow mic) or type + Enter
 3. Watch 13 cards go `WAKING → THINKING → STREAMING → DONE/SPEAKING` (1.6s) → `SpeakBar` auto-starts **Play 13 Agents** if `Voice ON` → map flies + glows per speaker
 4. Scroll: **Hunter** → click **Hunt Now** → pick tender → **Open in Email → CEO Inbox** → send
 5. **Map** → tap pin → office card; `Voice ON` → dot pulses when its agent speaks
@@ -134,9 +134,9 @@ Live preview: `http://localhost:3000` (port 3000, 0.0.0.0 for Arena preview) —
 |---|---|---|---|
 | **Framework** | Next.js 14.2.13 (App Router) | Vercel-native, SSR+RSC, API routes, file-based routing, `next build` 163kB. Vs Vite: no SSR, no API. Vs CRA: deprecated. | `app/page.tsx` is `"use client"` for interactivity, `app/api/*` are `dynamic='force-dynamic'` for live DB. Turbopack ready for Next 16. |
 | **Language** | TypeScript 5.5 | Type-safe `Office/Project/Resource/Opportunity` across dummy ↔ live. Catches `isKnowledgeOwner` missing at compile. | `tsconfig path @/*` for `lib/*` |
-| **Styling** | Tailwind 3.4 + `glass` (`backdrop-blur`) | 1-class responsive (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`), no CSS files, PWA-ready. Vs MUI: heavy, not brandable. | `tailwind.config tievora: {900,800,gold,cyan}` + `pulseGlow` keyframe |
-| **State** | Zustand 4.5 (light) | 2kB vs Redux 15kB, no boilerplate. `useTievoraStore` for `awakened/agents/speakingId`, `useAuth` for `user`. | `create<Store>((set)=>...)` |
-| **Animation** | Framer Motion 11 | `AnimatePresence` for `TIEVORA AWAKE` banner, `motion.div` for progress. Vs CSS: orchestrated. | `initial={{opacity:0}} animate={{opacity:1}}` |
+| **Styling** | Tailwind 3.4 + `glass` (`backdrop-blur`) | 1-class responsive (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`), no CSS files, PWA-ready. Vs MUI: heavy, not brandable. | `tailwind.config tiara: {900,800,gold,cyan}` + `pulseGlow` keyframe |
+| **State** | Zustand 4.5 (light) | 2kB vs Redux 15kB, no boilerplate. `useTiaraStore` for `awakened/agents/speakingId`, `useAuth` for `user`. | `create<Store>((set)=>...)` |
+| **Animation** | Framer Motion 11 | `AnimatePresence` for `TIARA AWAKE` banner, `motion.div` for progress. Vs CSS: orchestrated. | `initial={{opacity:0}} animate={{opacity:1}}` |
 | **Charts** | Recharts 2.12 | BarChart for P/L, `Cell` color by profit. Vs D3: too low-level. | `ResponsiveContainer` 100% |
 | **Map** | Leaflet 1.9.4 + react-leaflet 4.2.1 + leaflet.markercluster | Light 42kB, offline CARTO dark tiles, clustering for 50+ pins, flyTo, divIcon glow. Vs Mapbox: paid, Google Maps: billing + key. | `L.divIcon(html, iconSize)`, `markerClusterGroup`, `invalidateSize` fix |
 | **Voice** | Web Speech API (`speechSynthesis`) | Native browser, no backend, per-agent voice via `utter.voice`, rate/pitch vary. Vs ElevenLabs: cost, latency. | `pickVoiceForAgent` hash to English voice, `speakBriefing` queues 13 with 220ms gap |
@@ -196,7 +196,7 @@ All are **plug-in** — dummy → live via `NEXT_PUBLIC_DUMMY_MODE=false` + `DAT
 
 ### 8. Why No Company Has This — Moat
 
-- **Voice + Map + RAG + Sales in one wake word:** Others have dashboard *or* chatbot *or* map. No one has `Hello Tievora → 13 parallel agents speak + map flies + Hunter drafts email` in 1.6s.
+- **Voice + Map + RAG + Sales in one wake word:** Others have dashboard *or* chatbot *or* map. No one has `Hello Tiara → 13 parallel agents speak + map flies + Hunter drafts email` in 1.6s.
 - **Hybrid <200 for 5k:** Competitors force 5k to log or log nothing. We log <200 + auto-summarize 5k → RAG stays sharp, no fatigue.
 - **Real Tieto offices (50+ via tieto.com):** Not fake lat/lng, but real `Keilalahdentie 2-4` etc., with `unit` split (Create/Banking...), so CEO sees true org.
 - **One-toggle dummy ↔ live:** No rewrite. Same `GET /api/offices?unit=Create` hits dummy or PG based on env. Competitors need two codebases.
@@ -210,7 +210,7 @@ All are **plug-in** — dummy → live via `NEXT_PUBLIC_DUMMY_MODE=false` + `DAT
 
 **Skills needed (and used):**
 - **Frontend:** Next.js App Router, RSC vs Client Components, `dynamic(()=>...,{ssr:false})` for Leaflet, Zustand, Framer Motion, Tailwind responsive, `suppressHydrationWarning` for `toLocaleString('en-US')` vs `en-IN`, `useEffect` mounted guard for `window.speechSynthesis`, `cross-env` for Windows `dummy:run`.
-- **Maps:** Leaflet `divIcon` glow, `markerClusterGroup`, `flyTo`, `invalidateSize` on resize, `tievora-pin` CSS, CARTO attribution.
+- **Maps:** Leaflet `divIcon` glow, `markerClusterGroup`, `flyTo`, `invalidateSize` on resize, `tiara-pin` CSS, CARTO attribution.
 - **Voice:** `speechSynthesis.getVoices()` async, `voiceschanged` event, `utter.onend` Promise, `cancel()` on stop, hash voice pick, rate/pitch per agent.
 - **Backend:** `app/api/*` `force-dynamic`, `Pool` lazy, `toVectorLiteral`, `chunkText(80)`, `embed()` fallback dummy L2, `GET ?page&limit&q&mandatory`, `POST /api/seed` idempotent `ON CONFLICT DO UPDATE`.
 - **DB:** `psql $DATABASE_URL -f db/schema.sql`, `vector(1536)`, `GIN` for skills, `is_knowledge_owner` index, `work_log_chunks` FK cascade.
@@ -229,10 +229,10 @@ All are **plug-in** — dummy → live via `NEXT_PUBLIC_DUMMY_MODE=false` + `DAT
 
 **Dummy (fresher, 2 mins):**
 ```bash
-git clone https://github.com/Bilpes/TIEVORA.git && cd TIEVORA
+git clone https://github.com/Bilpes/TIARA.git && cd TIARA
 npm install          # adds cross-env
 npm run dummy:run    # cross-env NEXT_PUBLIC_DUMMY_MODE=true next dev -p 3000 -H 0.0.0.0
-# http://localhost:3000 → say Hello Tievora → 13 speak + map glows
+# http://localhost:3000 → say Hello Tiara → 13 speak + map glows
 ```
 
 **Live DB (prod):**
@@ -244,11 +244,11 @@ curl http://localhost:3000/api/seed          # {offices:50, ...}
 # verify paginated: curl "http://localhost:3000/api/resources?mandatory=true&page=1&limit=8"
 ```
 
-**Vercel:** Import `Bilpes/TIEVORA` → `NEXT_PUBLIC_DUMMY_MODE=true` (dummy) or `false` + `DATABASE_URL` (Neon) → `psql $DATABASE_URL -f db/schema.sql` once → `POST /api/seed`.
+**Vercel:** Import `Bilpes/TIARA` → `NEXT_PUBLIC_DUMMY_MODE=true` (dummy) or `false` + `DATABASE_URL` (Neon) → `psql $DATABASE_URL -f db/schema.sql` once → `POST /api/seed`.
 
-**Test voice:** Chrome/Edge → allow mic → `Hello Tievora` → `Voice ON` → `Play 13 Agents` → each card shows `SPEAKING`, map flies.
+**Test voice:** Chrome/Edge → allow mic → `Hello Tiara` → `Voice ON` → `Play 13 Agents` → each card shows `SPEAKING`, map flies.
 
 ---
 
-**Prepared by:** TIEVORA Agent Team | **For:** CEO Elias Virtanen & Managers | **Next:** Wire Tavily + Git webhooks, then SSO.
+**Prepared by:** TIARA Agent Team | **For:** CEO Elias Virtanen & Managers | **Next:** Wire Tavily + Git webhooks, then SSO.
 

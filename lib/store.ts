@@ -32,7 +32,7 @@ function initialAgents(): Record<string, AgentState> {
   return m;
 }
 
-export const useTievoraStore = create<Store>((set) => ({
+export const useTiaraStore = create<Store>((set) => ({
   awakened: false,
   wakeWord: null,
   agents: initialAgents(),

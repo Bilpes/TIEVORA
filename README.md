@@ -1,6 +1,6 @@
-# TIEVORA — CEO Command Center (12 Agents • Production Ready)
+# TIARA — CEO Command Center (12 Agents • Production Ready)
 
-> Say **“Hello Tievora”** or **“Hi Tievora”** → 12 agents wake in parallel, scanning 50+ Tietoevry offices (tieto.com/locations) across 27 countries, split by Create/Connect/Care/Banking/Industry/Transform, streaming to CEO in 1.6s.
+> Say **“Hello Tiara”** or **“Hi Tiara”** → 12 agents wake in parallel, scanning 50+ Tietoevry offices (tieto.com/locations) across 27 countries, split by Create/Connect/Care/Banking/Industry/Transform, streaming to CEO in 1.6s.
 
 Mobile • Tablet • Laptop • PWA • Leaflet clustered map • RBAC • Real API + pgvector RAG
 
@@ -61,7 +61,7 @@ cp .env.example .env
 NEXT_PUBLIC_DUMMY_MODE=true
 # live:
 NEXT_PUBLIC_DUMMY_MODE=false
-DATABASE_URL=postgres://tievora:tievora@localhost:5432/tievora
+DATABASE_URL=postgres://tiara:tiara@localhost:5432/tiara
 OPENAI_API_KEY=sk-...
 SLACK_WEBHOOK_URL=https://hooks.slack.com/...
 SMTP_HOST=smtp.example.com
@@ -75,7 +75,7 @@ Tailwind, glass UI, 44px targets, Web Speech API. 375/820/1440px tested.
 
 ## 🧪 Try
 
-1. `npm run dummy:run` → type “Hello Tievora” → 12 agents stream.
+1. `npm run dummy:run` → type “Hello Tiara” → 12 agents stream.
 2. Switch Role to “India Manager” → map/offices filter.
 3. Ask RAG “how to deploy” → dummy BM25 or live pgvector.
 4. Submit work log → new RAG hit instantly.
@@ -89,4 +89,4 @@ Tailwind, glass UI, 44px targets, Web Speech API. 375/820/1440px tested.
 
 ---
 
-Built for TIEVORA — dummy fast, prod ready with real DB + vector RAG.
+Built for TIARA — dummy fast, prod ready with real DB + vector RAG.

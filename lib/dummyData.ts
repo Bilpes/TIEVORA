@@ -123,7 +123,7 @@ export const offices: Office[] = [
 ];
 
 export const projects: Project[] = [
-  { id: "P01", name: "TIEVORA Core Platform", client: "Internal", region: "Global", office: "Espoo (HQ)", status: "On Track", progress: 72, deadline: "2026-09-30", budget: 450000, spent: 298000, profit: 87000, team: 18, risk: "Low", unit: "Transform" as BusinessUnit },
+  { id: "P01", name: "TIARA Core Platform", client: "Internal", region: "Global", office: "Espoo (HQ)", status: "On Track", progress: 72, deadline: "2026-09-30", budget: 450000, spent: 298000, profit: 87000, team: 18, risk: "Low", unit: "Transform" as BusinessUnit },
   { id: "P02", name: "NeoBank Ledger", client: "FinServe SG/SE", region: "Nordics+APAC", office: "Stockholm (Solna)", status: "At Risk", progress: 48, deadline: "2026-08-22", budget: 320000, spent: 210000, profit: 34000, team: 12, risk: "Medium - 2 leaves in Riga", unit: "Banking" as BusinessUnit },
   { id: "P03", name: "Care 360 FHIR", client: "Nordic Health", region: "Finland", office: "Espoo (HQ)", status: "On Track", progress: 80, deadline: "2026-09-05", budget: 610000, spent: 420000, profit: 98000, team: 22, risk: "Low", unit: "Transform" as BusinessUnit },
   { id: "P04", name: "Industry Twin", client: "Industrial SE/NO", region: "Nordics", office: "Göteborg", status: "Delayed", progress: 34, deadline: "2026-08-18", budget: 280000, spent: 205000, profit: -12000, team: 9, risk: "High - vendor delay Luleå", unit: "Industry" as BusinessUnit },
@@ -149,9 +149,9 @@ export const resources: Resource[] = [
 ];
 
 export const workLogs = [
-  { id: "W1", author: "Aarav Mehta", project: "TIEVORA Core", date: "2026-08-08", summary: "Implemented vector store pgvector 512 chunk, hybrid search recall 0.72 — Bangalore DC", tags: ["RAG","pgvector","Bangalore"] },
+  { id: "W1", author: "Aarav Mehta", project: "TIARA Core", date: "2026-08-08", summary: "Implemented vector store pgvector 512 chunk, hybrid search recall 0.72 — Bangalore DC", tags: ["RAG","pgvector","Bangalore"] },
   { id: "W2", author: "Chen Wei", project: "NeoBank Ledger", date: "2026-08-08", summary: "Reranker tuned p95 180ms → 92ms for Stockholm/Riga banking flows", tags: ["RAG","perf","Stockholm"] },
-  { id: "W3", author: "Elias Virtanen", project: "TIEVORA Core", date: "2026-08-07", summary: "Auth + RBAC for work-log API (Espoo HQ) — row-level security per office", tags: ["auth","Espoo"] },
+  { id: "W3", author: "Elias Virtanen", project: "TIARA Core", date: "2026-08-07", summary: "Auth + RBAC for work-log API (Espoo HQ) — row-level security per office", tags: ["auth","Espoo"] },
   { id: "W4", author: "Katarzyna Nowak", project: "Finance", date: "2026-08-06", summary: "E2E tests executive dashboard 42 cases — Szczecin/Warsaw", tags: ["qa","Poland"] },
   { id: "W5", author: "Hans Müller", project: "ESG Auto-Reporter", date: "2026-08-05", summary: "GDPR Art35 for RAG logs retention 90d — Germany/Finland", tags: ["compliance","Regensburg"] },
 ];

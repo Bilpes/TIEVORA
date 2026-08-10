@@ -38,7 +38,7 @@ export default function RAGPanel() {
         <div className="rounded-xl bg-[#0f1a33]/60 border border-white/10 p-3">
           <div className="text-xs font-bold text-white/70">Try these queries</div>
           <div className="mt-2 flex flex-wrap gap-2">
-            {["how to deploy TIEVORA","who is backup for Dubai?","why is logistics delayed?","pgvector chunk size","GDPR retention"].map(t=>(
+            {["how to deploy TIARA","who is backup for Dubai?","why is logistics delayed?","pgvector chunk size","GDPR retention"].map(t=>(
               <button key={t} onClick={()=>{setQ(t); setTimeout(ask,50);}} className="text-xs px-3 py-1 rounded-full bg-white/10 hover:bg-white/15 border border-white/10">{t}</button>
             ))}
           </div>

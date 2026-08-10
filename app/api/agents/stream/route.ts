@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const word = searchParams.get("word") || "Hello Tievora";
+  const word = searchParams.get("word") || "Hello Tiara";
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({

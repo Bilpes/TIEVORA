@@ -1,11 +1,11 @@
 "use client";
 import { agentDefs } from "@/lib/agents";
-import { useTievoraStore } from "@/lib/store";
+import { useTiaraStore } from "@/lib/store";
 import AgentCard from "./AgentCard";
 import SpeakBar from "./SpeakBar";
 
 export default function AgentGrid() {
-  const { awakened, agents } = useTievoraStore();
+  const { awakened, agents } = useTiaraStore();
   return (
     <div>
       <div className="flex flex-col gap-2 mb-3">

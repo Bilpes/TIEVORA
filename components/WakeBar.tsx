@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { Mic, Sparkles, RotateCcw } from "lucide-react";
-import { useTievoraStore } from "@/lib/store";
+import { useTiaraStore } from "@/lib/store";
 import { agentDefs } from "@/lib/agents";
 
 export default function WakeBar() {
-  const { awakened, triggerAwaken, reset, updateAgent } = useTievoraStore();
+  const { awakened, triggerAwaken, reset, updateAgent } = useTiaraStore();
   const [input, setInput] = useState("");
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<any>(null);
@@ -54,7 +54,7 @@ export default function WakeBar() {
 
   const checkWakeWord = (text: string) => {
     const t = text.toLowerCase();
-    if (t.includes("hello tievora") || t.includes("hi tievora") || t.includes("hey tievora")) {
+    if (t.includes("hello tiara") || t.includes("hi tiara") || t.includes("hey tiara")) {
       if (!awakened) wake(text);
       return true;
     }
@@ -64,7 +64,7 @@ export default function WakeBar() {
   const startListening = () => {
     const SR: any = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
     if (!SR) {
-      alert("Voice not supported in this browser — type Hello Tievora and press Enter.");
+      alert("Voice not supported in this browser — type Hello Tiara and press Enter.");
       return;
     }
     const rec = new SR();
@@ -106,7 +106,7 @@ export default function WakeBar() {
                 }
               }
             }}
-            placeholder='Type “Hello Tievora” or “Hi Tievora” and press Enter — or tap mic'
+            placeholder='Type “Hello Tiara” or “Hi Tiara” and press Enter — or tap mic'
             className="w-full h-12 md:h-14 rounded-2xl bg-[#0f1a33] border border-white/15 px-4 md:px-5 pr-28 text-sm md:text-base outline-none focus:border-[#d4a843]/50 placeholder:text-white/40"
           />
           <button
@@ -130,8 +130,8 @@ export default function WakeBar() {
       </div>
       <div className="text-[11px] text-white/50 flex flex-wrap gap-2 items-center">
         <span>Try:</span>
-        <button onClick={() => { setInput("Hello Tievora"); wake("Hello Tievora"); }} className="px-2 py-1 rounded-full bg-white/10 hover:bg-white/15">Hello Tievora 👋</button>
-        <button onClick={() => { setInput("Hi Tievora, what's the profit today?"); wake("Hi Tievora"); }} className="px-2 py-1 rounded-full bg-white/10 hover:bg-white/15">Hi Tievora — profit?</button>
+        <button onClick={() => { setInput("Hello Tiara"); wake("Hello Tiara"); }} className="px-2 py-1 rounded-full bg-white/10 hover:bg-white/15">Hello Tiara 👋</button>
+        <button onClick={() => { setInput("Hi Tiara, what's the profit today?"); wake("Hi Tiara"); }} className="px-2 py-1 rounded-full bg-white/10 hover:bg-white/15">Hi Tiara — profit?</button>
         <span className="hidden md:inline text-white/30">• Press “/” to focus • Mobile mic friendly</span>
       </div>
     </div>
