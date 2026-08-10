@@ -15,6 +15,7 @@ import RAGPanel from "@/components/RAGPanel";
 import WorkLogPanel from "@/components/WorkLogPanel";
 import RoleSwitch from "@/components/RoleSwitch";
 import NudgesPanel from "@/components/NudgesPanel";
+import SalesHunterPanel from "@/components/SalesHunterPanel";
 import { config } from "@/lib/config";
 
 export default function Page() {
@@ -40,10 +41,11 @@ export default function Page() {
               <div className="font-bold tracking-wide">TIEVORA</div>
               <div className="text-[10px] tracking-[0.2em] text-white/60 -mt-1">CEO COMMAND CENTER</div>
             </div>
-            <span className="hidden md:inline-flex ml-3 text-xs px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">● LIVE • 12 Agents • 50+ offices</span>
+            <span className="hidden md:inline-flex ml-3 text-xs px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">● LIVE • 13 Agents (12 + Hunter) • 50+ offices</span>
           </div>
           <nav className="hidden lg:flex items-center gap-5 text-sm text-white/70">
             <a href="#agents" className="hover:text-white">Agents</a>
+            <a href="#hunter" className="hover:text-white">Hunter</a>
             <a href="#map" className="hover:text-white">Map</a>
             <a href="#offices" className="hover:text-white">Offices</a>
             <a href="#projects" className="hover:text-white">Projects</a>
@@ -61,7 +63,7 @@ export default function Page() {
         </div>
         {mobileMenu && (
           <div className="lg:hidden border-t border-white/10 px-4 py-3 flex flex-col gap-3 text-sm bg-[#0a0f1e]">
-            <a href="#agents">Agents</a><a href="#map">Map</a><a href="#offices">Offices</a><a href="#projects">Projects</a><a href="#resources">Resources</a><a href="#rag">RAG</a>
+            <a href="#agents">Agents</a><a href="#hunter">Hunter</a><a href="#map">Map</a><a href="#offices">Offices</a><a href="#projects">Projects</a><a href="#resources">Resources</a><a href="#rag">RAG</a>
             <div className="text-xs text-white/40">Viewing as {user.name} • {user.role} {user.country? `(${user.country})`:""}</div>
           </div>
         )}
@@ -77,12 +79,12 @@ export default function Page() {
                 Say <span className="text-[#d4a843]">Hello Tievora</span> <span className="text-white/60">or</span> <span className="text-[#3dd5d6]">Hi Tievora</span>
               </h1>
               <p className="text-white/70 mt-3 text-sm md:text-base max-w-[640px]">
-                All 12 agents wake in parallel — scanning <b className="text-white">{offices.length} offices</b> in every Tietoevry country & state (Espoo HQ, Stockholm, Fornebu, Pune, Bangalore, Szczecin, Kyiv…), split by <b className="text-white">Create / Connect / Care / Banking / Industry / Transform</b>. Streams to CEO in 1.6s. {user.role==="Manager" ? `Manager view: filtered to ${user.country} only.` : "CEO sees everything."}
+                All 13 agents wake in parallel — scanning <b className="text-white">{offices.length} offices</b> in every Tietoevry country & state (Espoo HQ, Stockholm, Fornebu, Pune, Bangalore, Szczecin, Kyiv…), split by <b className="text-white">Create / Connect / Care / Banking / Industry / Transform</b>. Streams to CEO in 1.6s. {user.role==="Manager" ? `Manager view: filtered to ${user.country} only.` : "CEO sees everything."}
               </p>
               <div className="mt-5"><WakeBar /></div>
               <div className="mt-4 flex flex-wrap gap-2 text-xs">
                 <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">🎙️ Voice Wake</span>
-                <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">⚡ Parallel • 12 Agents</span>
+                <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">⚡ Parallel • 13 Agents</span>
                 <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">🌍 {offices.length} Offices • 27 Countries</span>
                 <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">🧠 RAG Knowledge</span>
                 <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10">🏢 Create / Banking / Industry…</span>
@@ -106,7 +108,7 @@ export default function Page() {
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-6 rounded-xl bg-gradient-to-r from-[#d4a843]/20 to-[#3dd5d6]/20 border border-[#d4a843]/30 p-3 flex flex-wrap items-center gap-3 text-sm">
                 <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
                 <span className="font-semibold">TIEVORA AWAKE •</span>
-                <span className="text-white/80">Broadcasting to all {offices.length} offices… 12 agents streaming by business unit — scroll to map.</span>
+                <span className="text-white/80">Broadcasting to all {offices.length} offices… 13 agents streaming by business unit — scroll to map.</span>
                 <span className="ml-auto text-xs px-2 py-1 rounded bg-black/30">Latency ~1.6s • Parallel • {user.role}</span>
               </motion.div>
             )}
@@ -116,6 +118,10 @@ export default function Page() {
 
       <section id="agents" className="max-w-[1440px] mx-auto px-4 md:px-6 mt-6">
         <AgentGrid />
+      </section>
+
+      <section id="hunter" className="max-w-[1440px] mx-auto px-4 md:px-6 mt-6">
+        <SalesHunterPanel />
       </section>
 
       <section id="map" className="max-w-[1440px] mx-auto px-4 md:px-6 mt-6">
