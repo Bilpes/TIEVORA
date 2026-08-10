@@ -66,14 +66,14 @@ export async function speakBriefing(agents: { id:string; name:string; office:str
   if (!isSpeechSupported()) return;
   stopSpeaking();
   await loadVoices();
-  await speak("Tievora awake. Twelve agents reporting live to CEO.", { rate: 1.05 });
+  await speak("Tiara awake. Twelve agents reporting live to CEO.", { rate: 1.05 });
   if (mode === "ceo") {
     const oracle = agents.find(a=> a.id==="A12") || agents[agents.length-1];
     if (oracle) {
       onProgress?.(0,1,oracle.id);
       await speak(`CEO Brief from ${oracle.name} at ${oracle.office}: ${oracle.insight}`, { agentId: oracle.id, rate: 1.0, pitch: 0.95 });
     }
-    await speak("Briefing complete. Scroll for details or say Hello Tievora again.", { rate: 1.0 });
+    await speak("Briefing complete. Scroll for details or say Hello Tiara again.", { rate: 1.0 });
     return;
   }
   for (let i=0;i<agents.length;i++) {

@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
-  title: "TIEVORA — CEO Command Center",
+  title: "TIARA — CEO Command Center",
   description: "12 Agents • Global Offices • RAG Knowledge • Production Ready",
   manifest: "/manifest.json",
 };

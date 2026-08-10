@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Volume2, VolumeX, Play, Square, Mic } from "lucide-react";
-import { useTievoraStore } from "@/lib/store";
+import { useTiaraStore } from "@/lib/store";
 import { agentDefs } from "@/lib/agents";
 import { isSpeechSupported, speakBriefing, stopSpeaking } from "@/lib/speech";
 
 export default function SpeakBar() {
-  const { awakened, agents, speakEnabled, setSpeakEnabled, speakingId, setSpeakingId, briefingActive, setBriefingActive } = useTievoraStore();
+  const { awakened, agents, speakEnabled, setSpeakEnabled, speakingId, setSpeakingId, briefingActive, setBriefingActive } = useTiaraStore();
   const [mounted, setMounted] = useState(false);
   const [supported, setSupported] = useState(false);
 

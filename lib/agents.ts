@@ -18,7 +18,7 @@ export const agentDefs: AgentDef[] = [
     office: "Espoo (HQ)", country: "Finland",
     insight: () => {
       const atRisk = projects.filter(p=>p.status!=="On Track").length;
-      return `Espoo HQ: ${projects.length} active • ${atRisk} at risk. TIEVORA Core ${projects[0].progress}% — on track. NeoBank (Stockholm/Riga) at risk — 2 handovers pending.`;
+      return `Espoo HQ: ${projects.length} active • ${atRisk} at risk. TIARA Core ${projects[0].progress}% — on track. NeoBank (Stockholm/Riga) at risk — 2 handovers pending.`;
     }
   },
   {

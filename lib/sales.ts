@@ -157,7 +157,7 @@ export const opportunities: Opportunity[] = [
     contactRole: "Head of Claims Ops, Allianz Direct",
     contactEmail: "hans.mueller@allianz.de",
     status: "New",
-    hunterNote: "Create Pune+Kyiv GenAI pod has RAG + IDP from ESG/TIEVORA work. Pitch: 6-week pilot with live claims data, Srinivasa reference.",
+    hunterNote: "Create Pune+Kyiv GenAI pod has RAG + IDP from ESG/TIARA work. Pitch: 6-week pilot with live claims data, Srinivasa reference.",
   },
 ];
 

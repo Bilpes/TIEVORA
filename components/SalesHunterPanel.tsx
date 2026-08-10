@@ -53,7 +53,7 @@ export default function SalesHunterPanel() {
         <span className="text-xs px-2 py-1 rounded-full bg-[#f43f5e]/15 text-[#f43f5e] border border-[#f43f5e]/30">{ops.length} live tenders • Pipeline €{(ops.reduce((s,o)=>s+o.valueEUR,0)/1000000).toFixed(1)}M</span>
       </div>
       <p className="text-xs text-white/60 mt-1">
-        Hunter scans <b className="text-white">TED.europa.eu, Hilma.fi, Upphandling.se, Mercell, Prozorro + web (Tavily)</b> every 6h, scores fit vs Tieto units (Create/Connect/Care/Banking/Industry/Transform), maps competitors, finds CEO email, drafts outreach. When you say <b className="text-white">Hello Tievora</b>, Hunter speaks its pipeline too.
+        Hunter scans <b className="text-white">TED.europa.eu, Hilma.fi, Upphandling.se, Mercell, Prozorro + web (Tavily)</b> every 6h, scores fit vs Tieto units (Create/Connect/Care/Banking/Industry/Transform), maps competitors, finds CEO email, drafts outreach. When you say <b className="text-white">Hello Tiara</b>, Hunter speaks its pipeline too.
       </p>
 
       {/* KPIs */}

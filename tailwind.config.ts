@@ -4,7 +4,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        tievora: { 900: "#0a0f1e", 800: "#0f1a33", 700: "#162447", gold: "#d4a843", cyan: "#3dd5d6", violet: "#7c5cfc" }
+        tiara: { 900: "#0a0f1e", 800: "#0f1a33", 700: "#162447", gold: "#d4a843", cyan: "#3dd5d6", violet: "#7c5cfc" }
       },
       fontFamily: { sans: ["Inter","system-ui","sans-serif"] },
       animation: { pulseGlow: "pulseGlow 2s infinite", float: "float 6s ease-in-out infinite" },

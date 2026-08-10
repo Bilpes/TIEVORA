@@ -48,6 +48,6 @@ export async function POST(req: Request) {
   if (!pool) return Response.json({ ok:false, error:"DATABASE_URL missing" }, { status:500 });
   const webhook = process.env.SLACK_WEBHOOK_URL;
   for (const n of nudges) { try{ await pool.query(`INSERT INTO nudges (resource_id, channel) VALUES ($1,$2)`, [n.id, channel]); }catch{} }
-  if (channel==="slack" && webhook) { try{ await fetch(webhook,{ method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ text:`TIEVORA: ${nudges.length} Knowledge Owners nudged for missing logs` })}); }catch{} }
+  if (channel==="slack" && webhook) { try{ await fetch(webhook,{ method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ text:`TIARA: ${nudges.length} Knowledge Owners nudged for missing logs` })}); }catch{} }
   return Response.json({ ok:true, channel, sent: nudges.length, message:`✓ Live ${channel} nudges dispatched to ${nudges.length} Knowledge Owners.`, mode:"live" });
 }

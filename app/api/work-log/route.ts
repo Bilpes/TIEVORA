@@ -8,7 +8,7 @@ export async function POST(req: Request) {
   if (!body?.summary || !body?.author) return Response.json({ ok:false, error:"author and summary required" }, { status: 400 });
   const dummyMode = process.env.NEXT_PUBLIC_DUMMY_MODE !== "false";
   const tags = (body.tags || "").split(",").map((s:string)=>s.trim()).filter(Boolean);
-  const project = body.project || "TIEVORA Core";
+  const project = body.project || "TIARA Core";
 
   if (dummyMode) {
     const id = "W" + (dummy.length + 1);
