@@ -18,12 +18,14 @@ type Store = {
   speakEnabled: boolean;
   speakingId: string | null;
   briefingActive: boolean;
+  autoBriefingDone: boolean;
   triggerAwaken: (word: string) => void;
   reset: () => void;
   updateAgent: (id: string, patch: Partial<AgentState>) => void;
   setSpeakEnabled: (v:boolean)=>void;
   setSpeakingId: (id:string|null)=>void;
   setBriefingActive: (v:boolean)=>void;
+  setAutoBriefingDone: (v:boolean)=>void;
 };
 
 function initialAgents(): Record<string, AgentState> {
@@ -40,10 +42,12 @@ export const useTiaraStore = create<Store>((set) => ({
   speakEnabled: true,
   speakingId: null,
   briefingActive: false,
-  triggerAwaken: (word) => set({ awakened: true, wakeWord: word, globalThinking: true }),
-  reset: () => set({ awakened: false, wakeWord: null, globalThinking: false, agents: initialAgents(), speakingId: null, briefingActive: false }),
+  autoBriefingDone: false,
+  triggerAwaken: (word) => set({ awakened: true, wakeWord: word, globalThinking: true, autoBriefingDone: false }),
+  reset: () => set({ awakened: false, wakeWord: null, globalThinking: false, agents: initialAgents(), speakingId: null, briefingActive: false, autoBriefingDone: false }),
   updateAgent: (id, patch) => set(s => ({ agents: { ...s.agents, [id]: { ...s.agents[id], ...patch } } })),
   setSpeakEnabled: (v)=> set({ speakEnabled: v }),
   setSpeakingId: (id)=> set({ speakingId: id }),
   setBriefingActive: (v)=> set({ briefingActive: v }),
+  setAutoBriefingDone: (v)=> set({ autoBriefingDone: v }),
 }));
