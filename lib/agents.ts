@@ -1,4 +1,5 @@
 import { offices, projects, resources, kpis } from "./dummyData";
+import { opportunities, salesKpis } from "./sales";
 
 export type AgentDef = {
   id: string;
@@ -74,5 +75,13 @@ export const agentDefs: AgentDef[] = [
     id: "A12", name: "Oracle", role: "CEO Executive Summary Agent", icon: "👑", color: "#d4a843",
     office: "Espoo (HQ)", country: "Finland",
     insight: () => `CEO Brief (Espoo HQ): ON TRACK but 2 at risk. Profit OK, 1 loss. Act now: backups for Kyiv/Warsaw/Stockholm, rescue Aug 18 deadline, enforce work-log compliance. Full drill-down below — all countries/states reporting.`
+  },
+  {
+    id: "A13", name: "Hunter", role: "Sales Hunter Agent", icon: "🎯", color: "#f43f5e",
+    office: "Espoo (HQ)", country: "Finland",
+    insight: () => {
+      const top = [...opportunities].sort((a,b)=> b.fitScore - a.fitScore)[0];
+      return `Hunter: Pipeline €${(salesKpis.pipelineEUR/1000000).toFixed(1)}M • ${opportunities.length} live tenders • Top: ${top.title} (${top.buyer}, €${(top.valueEUR/1000000).toFixed(1)}M, fit ${top.fitScore}%) vs ${top.competitors.slice(0,2).join("/")} — win ${top.winProb}%. Next deadline ${top.deadline}. I already drafted the CEO email.`;
+    }
   },
 ];
