@@ -1,5 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
+import { Volume2, VolumeX } from "lucide-react";
+import { speakOneAgent, isSpeechSupported, stopSpeaking } from "@/lib/speech";
+import { useTievoraStore } from "@/lib/store";
 
 export default function AgentCard({ def, state, awakened }: any) {
   const statusColor: Record<string,string> = {
@@ -9,22 +12,41 @@ export default function AgentCard({ def, state, awakened }: any) {
     streaming: "bg-violet-400/20 text-violet-300",
     done: "bg-emerald-400/20 text-emerald-300",
   };
+  const { speakingId, setSpeakingId } = useTievoraStore();
+  const isSpeaking = speakingId === def.id;
+  const canSpeak = !!state?.insight && isSpeechSupported();
+  const handleSpeak = async () => {
+    if (isSpeaking) { stopSpeaking(); setSpeakingId(null); return; }
+    setSpeakingId(def.id);
+    await speakOneAgent({ id: def.id, name: def.name, office: def.office, insight: state.insight });
+    setSpeakingId(null);
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0 }}
-      className="glass rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden"
+      className={`glass rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden ${isSpeaking ? "ring-2 ring-emerald-400/50 glow-cyan" : ""}`}
     >
       <div className="absolute inset-0 opacity-[0.06]" style={{ background: `radial-gradient(400px at 20% 0%, ${def.color}, transparent)` }} />
       <div className="relative flex items-start justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl grid place-items-center text-lg" style={{ background: `${def.color}22`, border: `1px solid ${def.color}40` }}>{def.icon}</div>
+          <div className="w-10 h-10 rounded-xl grid place-items-center text-lg relative" style={{ background: `${def.color}22`, border: `1px solid ${def.color}40` }}>
+            {def.icon}
+            {isSpeaking && <span className="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full animate-ping" />}
+          </div>
           <div>
-            <div className="font-bold text-sm leading-none">{def.name}</div>
+            <div className="font-bold text-sm leading-none flex items-center gap-1">{def.name} {isSpeaking && <span className="text-[10px] px-1 rounded bg-emerald-500 text-white animate-pulse">SPEAKING</span>}</div>
             <div className="text-[11px] text-white/60">{def.role}</div>
             <div className="text-[11px] text-white/40">{def.office} • {def.country}</div>
           </div>
         </div>
-        <span className={`text-[10px] px-2 py-1 rounded-full border ${statusColor[state?.status || "idle"]}`}>{(state?.status || "idle").toUpperCase()}</span>
+        <div className="flex items-center gap-1">
+          {canSpeak && (
+            <button onClick={handleSpeak} title={isSpeaking ? "Stop" : "Speak insight"} className={`w-7 h-7 grid place-items-center rounded-full border ${isSpeaking ? "bg-emerald-500 text-white border-emerald-500 animate-pulse" : "bg-white/10 border-white/10 hover:bg-white/15"}`}>
+              {isSpeaking ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            </button>
+          )}
+          <span className={`text-[10px] px-2 py-1 rounded-full border ${statusColor[state?.status || "idle"]}`}>{(state?.status || "idle").toUpperCase()}</span>
+        </div>
       </div>
 
       <div className="relative">
