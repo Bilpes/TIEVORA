@@ -29,7 +29,7 @@ export default function AgentCard({ def, state, awakened }: any) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0 }}
-      className={`glass rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden ${isSpeaking ? "ring-2 ring-emerald-400/50 glow-cyan" : ""}`}
+      className={`glass-strong card-hover rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden ${isSpeaking ? "ring-2 ring-emerald-400/50 glow-cyan-strong shimmer" : ""}`}
     >
       <div className="absolute inset-0 opacity-[0.06]" style={{ background: `radial-gradient(400px at 20% 0%, ${def.color}, transparent)` }} />
       <div className="relative flex items-start justify-between">
