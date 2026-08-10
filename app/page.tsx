@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { offices as dummyOffices, kpis } from "@/lib/dummyData";
 import { useTievoraStore } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
+import { agentDefs } from "@/lib/agents";
 import WakeBar from "@/components/WakeBar";
 import AgentGrid from "@/components/AgentGrid";
 import GlobalOfficesPanel from "@/components/GlobalOfficesPanel";
@@ -19,7 +20,8 @@ import SalesHunterPanel from "@/components/SalesHunterPanel";
 import { config } from "@/lib/config";
 
 export default function Page() {
-  const { awakened } = useTievoraStore();
+  const { awakened, speakingId } = useTievoraStore();
+  const speakingOffice = speakingId ? agentDefs.find(a=> a.id===speakingId)?.office : undefined;
   const { user } = useAuth();
   const [dummyMode, setDummyMode] = useState(config.dummyMode);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -132,8 +134,14 @@ export default function Page() {
           </div>
           <p className="text-xs text-white/60 mt-1">Colors by business unit: Create (#d4a843) • Banking (#3dd5d6) • Industry (#7c5cfc) • Connect (#34d399) • Care (#f472b6) • Transform (#f59e0b). Cluster expands on zoom.</p>
           <div className="mt-4">
-            <WorldMap offices={user.role==="CEO" ? offices : offices.filter(o=>o.country===user.country)} onSelect={setSelectedOffice} />
+            <WorldMap offices={user.role==="CEO" ? offices : offices.filter(o=>o.country===user.country)} onSelect={setSelectedOffice} speakingOffice={speakingOffice} />
           </div>
+          {speakingOffice && (
+            <div className="mt-2 text-xs text-emerald-300 flex items-center gap-2">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
+              Speaking now: <b className="text-white">{agentDefs.find(a=>a.id===speakingId)?.name}</b> from {speakingOffice} — glowing on map
+            </div>
+          )}
           {selectedOffice && (
             <div className="mt-3 rounded-xl bg-[#0f1a33]/60 border border-[#d4a843]/30 p-3 flex gap-3">
               <div className="w-9 h-9 rounded-lg bg-[#d4a843]/20 grid place-items-center text-xs font-bold">{selectedOffice.id.split("-")[1]}</div>
